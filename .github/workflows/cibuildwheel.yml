@@ -17,9 +17,8 @@ jobs:
 
       - name: Build wheels
         uses: joerick/cibuildwheel@v1.10.0
-        # to supply options, put them in 'env', like:
-        # env:
-        #   CIBW_SOME_OPTION: value
+        env:
+          CIBW_BUILD: cp36-manylinux_x86_64 cp36-manylinux_i686	cp37-manylinux_x86_64 cp37-manylinux_x86_64 cp38-manylinux_x86_64 cp38-manylinux_i686 cp39-manylinux_x86_64 cp39-manylinux_i686
 
       - uses: actions/upload-artifact@v2
         with:
