@@ -1,6 +1,6 @@
 name: Windows & Mac Build
 
-on: [push, pull_request]
+on: workflow_dispatch
 
 jobs:
   deploy:
