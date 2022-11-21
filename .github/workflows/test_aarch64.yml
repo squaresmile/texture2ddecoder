@@ -60,13 +60,9 @@ jobs:
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-      # Build
-      - name: Build package
-        run: python setup.py build
-
       # Install Local
       - name: Install package
-        run: python setup.py install
+        run: python setup.py install --user
 
       # Run Tests, have to be in a file with test in name in a folder named tests with functions with test in the name
       - name: Run tests
