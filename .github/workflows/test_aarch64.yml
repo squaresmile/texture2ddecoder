@@ -6,8 +6,8 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-20.04, windows-2019, macOS-11]
-        cp: ["cp37", "cp38", "cp39", "cp310", "cp311"]
+        os: [macOS-11]
+        cp: ["cp38", "cp39", "cp310", "cp311"]
 
     name: Build ${{ matrix.cp }} wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -25,7 +25,8 @@ jobs:
         uses: joerick/cibuildwheel@v2.11.2
         env:
           CIBW_ARCHS_LINUX: auto aarch64
-          CIBW_ARCHS_MACOS: x86_64 arm64
+          CIBW_ARCHS_MACOS: x86_64 arm64 universal2
+          CIBW_BUILD_VERBOSITY_MACOS: 3
           CIBW_BUILD: |
             ${{ matrix.cp }}-manylinux_x86_64 
             ${{ matrix.cp }}-manylinux_i686 
@@ -35,8 +36,8 @@ jobs:
             ${{ matrix.cp }}-macosx_x86_64 
             ${{ matrix.cp }}-macosx_arm64 
             ${{ matrix.cp }}-macosx_universal2
-          CIBW_TEST_REQUIRES: pytest pillow
-          CIBW_TEST_COMMAND: pytest -v -s {package}/tests
+#           CIBW_TEST_REQUIRES: pytest pillow
+#           CIBW_TEST_COMMAND: pytest -v -s {package}/tests
          
 #       - name: Publish a Python distribution to PyPI
 #         uses: pypa/gh-action-pypi-publish@release/v1
